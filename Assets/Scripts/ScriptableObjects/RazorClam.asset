@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04aee54bf4e782e4996211a33bb6d06d, type: 3}
   m_Name: RazorClam
   m_EditorClassIdentifier: Assembly-CSharp::AnimalCardData
-  animalName: 
-  icon: {fileID: 0}
-  cost: 0
+  animalName: Razor Clam
+  icon: {fileID: 21300000, guid: 705f0ca97edc8854e98ad95e509e5bcd, type: 3}
+  cost: 50
+  animalPrefab: {fileID: 2571085102849394881, guid: 8bbd9ee3ca1bdd94ca103ce0e6caea81, type: 3}

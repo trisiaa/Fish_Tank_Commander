@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04aee54bf4e782e4996211a33bb6d06d, type: 3}
   m_Name: Squirrel
   m_EditorClassIdentifier: Assembly-CSharp::AnimalCardData
-  animalName: 
-  icon: {fileID: 0}
-  cost: 0
+  animalName: Squirrel
+  icon: {fileID: 21300000, guid: 26e541d6e96e6be45898b1623ffb87f5, type: 3}
+  cost: 100
+  animalPrefab: {fileID: 389054120862640459, guid: 5685dd7db6fbf13449ccc27e67b58e2b, type: 3}
