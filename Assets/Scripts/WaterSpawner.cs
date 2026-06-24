@@ -10,10 +10,24 @@ public class WaterSpawner : MonoBehaviour
     public float minTime = 3f;
     public float maxTime = 7f;
 
+    [Header("Clam Settings")]
+public bool isRazorClam;
+public float clamInterval = 8f;
+
+    [Header("Spawn Offset")]
+public Vector2 clamOffset = new Vector2(0, 80);
+
     private void Start()
+{
+    if(isRazorClam)
+    {
+        StartCoroutine(SpawnFromClam());
+    }
+    else
     {
         StartCoroutine(SpawnWater());
     }
+}
 
     IEnumerator SpawnWater()
     {
@@ -26,17 +40,33 @@ public class WaterSpawner : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnFromClam()
+{
+    while(true)
+    {
+        yield return new WaitForSeconds(clamInterval);
+
+        SpawnAtPosition(Vector3.zero);
+    }
+}
+
     public void SpawnAtPosition(Vector3 position)
 {
-    GameObject water =
-        Instantiate(
-            waterPrefab,
-            spawnArea);
+    GameObject water = Instantiate(waterPrefab);
+
+    WaterSystem waterSystem =
+    water.GetComponent<WaterSystem>();
+
+waterSystem.fromRazorClam = true;
 
     RectTransform rect =
         water.GetComponent<RectTransform>();
 
-    rect.position = position;
+    rect.SetParent(
+    transform,
+    false);
+
+rect.anchoredPosition = Vector2.zero;
 }
 
     void Spawn()

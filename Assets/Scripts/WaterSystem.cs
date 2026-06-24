@@ -11,6 +11,9 @@ public class WaterSystem : MonoBehaviour
     public float stopY = -500f;
     public float lifeTime = 5f;
 
+    [Header("Source")]
+    public bool fromRazorClam = false;
+
     RectTransform rect;
 
     bool hasStopped = false;
@@ -24,17 +27,24 @@ public class WaterSystem : MonoBehaviour
     private void Update()
     {
         if (!hasStopped)
-        {
-            rect.anchoredPosition +=
-                Vector2.down *
-                fallSpeed *
-                Time.deltaTime;
+{
+    if(!fromRazorClam)
+    {
+        rect.anchoredPosition +=
+            Vector2.down *
+            fallSpeed *
+            Time.deltaTime;
 
-            if (rect.anchoredPosition.y <= stopY)
-            {
-                hasStopped = true;
-            }
+        if (rect.anchoredPosition.y <= stopY)
+        {
+            hasStopped = true;
         }
+    }
+    else
+    {
+        hasStopped = true;
+    }
+}
         else
         {
             timer += Time.deltaTime;
