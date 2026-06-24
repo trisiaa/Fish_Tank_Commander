@@ -4,8 +4,8 @@ using UnityEngine;
 public class AnimalCardData : ScriptableObject
 {
     public string animalName;
-
     public Sprite icon;
-
     public int cost;
+
+    public GameObject animalPrefab;
 }

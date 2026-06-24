@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 26e541d6e96e6be45898b1623ffb87f5
+guid: 07034627886f8c0479bc88976740da87
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2980905860143696761
-    second: tupai_0
+      213: 7914278754208769724
+    second: frame pilih_0
+  - first:
+      213: -8538795061436368237
+    second: frame pilih_1
+  - first:
+      213: -7468993368818158717
+    second: frame pilih_2
+  - first:
+      213: 9012021835963095201
+    second: frame pilih_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tupai_0
+      name: frame pilih_0
       rect:
         serializedVersion: 2
-        x: 104
-        y: 24
-        width: 318
-        height: 415
+        x: 0
+        y: 327
+        width: 173
+        height: 173
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +150,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7843149e9e1b1a6d0800000000000000
-      internalID: -2980905860143696761
+      spriteID: cb6e806689a25dd60800000000000000
+      internalID: 7914278754208769724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame pilih_1
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 327
+        width: 173
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39ab931d12b108980800000000000000
+      internalID: -8538795061436368237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame pilih_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 173
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38378dd7a1ec85890800000000000000
+      internalID: -7468993368818158717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: frame pilih_3
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 0
+        width: 173
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a8d4a0bc12211d70800000000000000
+      internalID: 9012021835963095201
       vertices: []
       indices: 
       edges: []
@@ -161,7 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tupai_0: -2980905860143696761
+      frame pilih_0: 7914278754208769724
+      frame pilih_1: -8538795061436368237
+      frame pilih_2: -7468993368818158717
+      frame pilih_3: 9012021835963095201
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

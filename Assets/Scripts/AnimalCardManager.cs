@@ -2,13 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlantCardManager : MonoBehaviour
+public class AnimalCardManager : MonoBehaviour
 {
     public AnimalCardData[] levelCards;
 
     public Image[] icons;
 
     public TMP_Text[] costs;
+
+    public Transform[] gridSlots;
 
     private void Start()
     {
@@ -31,5 +33,10 @@ public class PlantCardManager : MonoBehaviour
             icons[i].sprite = levelCards[i].icon;
             costs[i].text = levelCards[i].cost.ToString();
         }
+    }
+
+    public void PlaceOnSlot(int slotIndex)
+    {
+        CardManager.instance.PlaceAnimal(gridSlots[slotIndex]);
     }
 }
