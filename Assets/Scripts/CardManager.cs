@@ -8,6 +8,8 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     public AnimalCardData animalCardData;
     public GameObject selectedBorder;
 
+    public GameObject lockOverlay;
+
     public static AnimalCardData selectedCard;
 
     public static CardManager instance;
@@ -23,6 +25,15 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
 {
+    if(!GameManager.Instance.HasWater(
+    animalCardData.cost))
+{
+    GameManager.Instance
+        .FlashWaterPanel();
+
+    return;
+}
+
     if(currentSelectedCard != null)
     {
         currentSelectedCard.selectedBorder.SetActive(false);
@@ -45,6 +56,14 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     if (slot.childCount > 0)
         return;
 
+    if (!GameManager.Instance.HasWater(selectedCard.cost))
+    {
+        Debug.Log("Water tidak cukup");
+        return;
+    }
+
+    GameManager.Instance.SpendWater(selectedCard.cost);
+
     GameObject animal =
         Instantiate(selectedCard.animalPrefab, slot);
 
@@ -54,11 +73,20 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     rect.anchoredPosition = Vector2.zero;
 
     if(currentSelectedCard != null)
-{
-    currentSelectedCard.selectedBorder.SetActive(false);
-    currentSelectedCard = null;
+    {
+        currentSelectedCard.selectedBorder.SetActive(false);
+        currentSelectedCard = null;
+    }
+
+    selectedCard = null;
 }
 
-selectedCard = null;
+public void UpdateCardVisual()
+{
+    bool enoughWater =
+        GameManager.Instance.HasWater(
+            animalCardData.cost);
+
+    lockOverlay.SetActive(!enoughWater);
 }
 }
