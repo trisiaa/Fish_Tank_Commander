@@ -15,14 +15,23 @@ public class WaterSystem : MonoBehaviour
     public bool fromRazorClam = false;
 
     RectTransform rect;
+    RectTransform spawnArea;
 
     bool hasStopped = false;
     float timer;
 
     private void Start()
-    {
-        rect = GetComponent<RectTransform>();
-    }
+{
+    rect = GetComponent<RectTransform>();
+
+    spawnArea =
+        GameObject.Find("WaterSpawnArea")
+        .GetComponent<RectTransform>();
+
+    stopY =
+        -spawnArea.rect.height / 2
+        + rect.rect.height / 2;
+}
 
     private void Update()
     {

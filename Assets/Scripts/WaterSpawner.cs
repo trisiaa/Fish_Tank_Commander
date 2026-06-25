@@ -83,9 +83,13 @@ rect.anchoredPosition = Vector2.zero;
                 -spawnArea.rect.width / 2,
                  spawnArea.rect.width / 2);
 
-        rect.anchoredPosition =
-            new Vector2(
-                randomX,
-                spawnArea.rect.height / 2);
+        float startY =
+    spawnArea.rect.height / 2
+    - rect.rect.height / 2;
+
+rect.anchoredPosition =
+    new Vector2(
+        randomX,
+        startY);
     }
 }

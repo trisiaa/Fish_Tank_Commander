@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb19118337f4f346b4f14d36475d331, type: 3}
+  m_Name: Ojol
+  m_EditorClassIdentifier: Assembly-CSharp::HumanData
+  humanName: Ojol
+  sprite: {fileID: 21300000, guid: 163c79ab61445bb4cac134b9ab442170, type: 3}
+  prefab: {fileID: 601826319294480550, guid: 02a2cefdccf0f7043afd2b475e6cd886, type: 3}
+  moveSpeed: 50
+  maxHealth: 150
+  damage: 20
+  attackInterval: 2
