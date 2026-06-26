@@ -72,7 +72,15 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
 
     rect.anchoredPosition = Vector2.zero;
 
-    if(currentSelectedCard != null)
+    SlotManager slotData =
+        slot.GetComponent<SlotManager>();
+
+    if (slotData != null)
+    {
+        slotData.occupied = true;
+    }
+
+    if (currentSelectedCard != null)
     {
         currentSelectedCard.selectedBorder.SetActive(false);
         currentSelectedCard = null;

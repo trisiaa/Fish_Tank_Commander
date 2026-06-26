@@ -60,5 +60,12 @@ public class HumanManager : MonoBehaviour
 
         rect.anchoredPosition =
             lane.anchoredPosition;
+
+        HumanController controller =
+    newHuman.GetComponent<HumanController>();
+
+controller.data = randomHuman;
+
+controller.SetLane(laneIndex);
     }
 }

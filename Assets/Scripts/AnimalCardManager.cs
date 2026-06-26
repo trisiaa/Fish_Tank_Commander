@@ -10,12 +10,34 @@ public class AnimalCardManager : MonoBehaviour
 
     public TMP_Text[] costs;
 
-    public Transform[] gridSlots;
+    [Header("Grid")]
+public Transform gridArea;
+
+[HideInInspector]
+public Transform[] gridSlots;
 
     private void Start()
+{
+    LoadGridSlots();
+
+    SetupCards();
+}
+
+    void LoadGridSlots()
+{
+    if (gridArea == null)
     {
-        SetupCards();
+        Debug.LogError("Grid Area belum diisi di AnimalCardManager!");
+        return;
     }
+
+    gridSlots = new Transform[gridArea.childCount];
+
+    for (int i = 0; i < gridArea.childCount; i++)
+    {
+        gridSlots[i] = gridArea.GetChild(i);
+    }
+}
 
     void SetupCards()
     {

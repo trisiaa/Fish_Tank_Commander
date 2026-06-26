@@ -15,19 +15,25 @@ public class GameManager : MonoBehaviour
 
     public int currentWater;
 
+    private AnimalCardManager animalCardManager;
+
     private void Awake()
-    {
-        Instance = this;
-    }
+{
+    Instance = this;
 
-    private void Start()
-    {
-        currentWater = startingWater;
+    animalCardManager = GetComponent<AnimalCardManager>();
+}
 
-        UpdateUI();
+   private void Start()
+{
+    currentWater = startingWater;
 
-        RefreshCards();
-    }
+    InitializeGrid();
+
+    UpdateUI();
+
+    RefreshCards();
+}
 
     void UpdateUI()
     {
@@ -45,6 +51,25 @@ public class GameManager : MonoBehaviour
             card.UpdateCardVisual();
         }
     }
+
+    void InitializeGrid()
+{
+    if (animalCardManager == null)
+        return;
+
+    for (int i = 0; i < animalCardManager.gridSlots.Length; i++)
+    {
+        SlotManager slot =
+            animalCardManager.gridSlots[i]
+            .GetComponent<SlotManager>();
+
+        if (slot == null)
+            continue;
+
+        slot.row = i / 5;
+        slot.lane = i % 5;
+    }
+}
 
     public void AddWater(int amount)
     {
