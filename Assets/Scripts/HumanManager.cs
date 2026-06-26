@@ -6,8 +6,11 @@ public class HumanManager : MonoBehaviour
     [Header("Human List")]
     public HumanData[] humans;
 
-    [Header("Lane Spawn")]
-    public RectTransform[] laneSpawnPoints;
+    [Header("Spawn Lane")]
+    public RectTransform[] lanePoints;
+
+    [Header("Lane Aktif")]
+    public int[] activeLanes;
 
     [Header("Parent")]
     public RectTransform humanParent;
@@ -25,28 +28,37 @@ public class HumanManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            yield return new WaitForSeconds(
+                Random.Range(minSpawnTime, maxSpawnTime));
+
             SpawnHuman();
         }
     }
 
     void SpawnHuman()
     {
-        if (humans.Length == 0 || laneSpawnPoints.Length == 0)
+        if (humans.Length == 0)
             return;
 
-        // Pilih human secara acak
-        HumanData randomHuman = humans[Random.Range(0, humans.Length)];
+        if (activeLanes.Length == 0)
+            return;
 
-        // Pilih lane secara acak
-        RectTransform lane = laneSpawnPoints[Random.Range(0, laneSpawnPoints.Length)];
+        HumanData randomHuman =
+            humans[Random.Range(0, humans.Length)];
 
-        // Spawn prefab
-        GameObject human = Instantiate(randomHuman.prefab, humanParent);
+        int laneIndex =
+            activeLanes[Random.Range(0, activeLanes.Length)];
 
-        RectTransform rect = human.GetComponent<RectTransform>();
+        RectTransform lane =
+            lanePoints[laneIndex];
 
-        // Posisi sama dengan lane
-        rect.anchoredPosition = lane.anchoredPosition;
+        GameObject newHuman =
+            Instantiate(randomHuman.prefab, humanParent);
+
+        RectTransform rect =
+            newHuman.GetComponent<RectTransform>();
+
+        rect.anchoredPosition =
+            lane.anchoredPosition;
     }
 }
