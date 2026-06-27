@@ -15,4 +15,5 @@ MonoBehaviour:
   animalName: Tortoise
   icon: {fileID: 21300000, guid: 374c7639a6ba7964a97b97e8a10aaa15, type: 3}
   cost: 50
+  maxHP: 2000
   animalPrefab: {fileID: 5518661291962872121, guid: 21cd3a85ff91d2d45a4b873854371b5f, type: 3}

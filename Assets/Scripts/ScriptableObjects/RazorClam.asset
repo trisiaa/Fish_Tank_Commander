@@ -15,4 +15,5 @@ MonoBehaviour:
   animalName: Razor Clam
   icon: {fileID: 21300000, guid: 705f0ca97edc8854e98ad95e509e5bcd, type: 3}
   cost: 50
+  maxHP: 150
   animalPrefab: {fileID: 2571085102849394881, guid: 8bbd9ee3ca1bdd94ca103ce0e6caea81, type: 3}

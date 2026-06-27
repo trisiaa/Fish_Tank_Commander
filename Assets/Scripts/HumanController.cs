@@ -16,6 +16,10 @@ public class HumanController : MonoBehaviour
 
     private bool canMove = true;
 
+    private AnimalController targetAnimal;
+    
+    private float attackTimer;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -26,9 +30,16 @@ public class HumanController : MonoBehaviour
 
     private void Update()
 {
+    CheckAnimal();
 
     if (canMove)
+    {
         Move();
+    }
+    else
+    {
+        Attack();
+    }
 }
 
     void Move()
@@ -39,7 +50,6 @@ public class HumanController : MonoBehaviour
             Time.deltaTime;
 
         UpdateCurrentRow();
-        CheckAnimal();
 
         if (rect.anchoredPosition.y < -1800)
         {
@@ -70,11 +80,34 @@ public class HumanController : MonoBehaviour
 
     if (slot.occupied)
     {
+        targetAnimal =
+            slot.GetComponentInChildren<AnimalController>();
+
         StopMoving();
     }
     else
     {
+        targetAnimal = null;
+
         ContinueMoving();
+    }
+}
+
+    void Attack()
+{
+    if (targetAnimal == null)
+    {
+        attackTimer = 0;
+        return;
+    }
+
+    attackTimer += Time.deltaTime;
+
+    if (attackTimer >= data.attackInterval)
+    {
+        attackTimer = 0;
+
+        targetAnimal.TakeDamage(data.damage);
     }
 }
 
