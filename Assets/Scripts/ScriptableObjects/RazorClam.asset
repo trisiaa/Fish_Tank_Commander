@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: RazorClam
   m_EditorClassIdentifier: Assembly-CSharp::AnimalCardData
   animalName: Razor Clam
-  icon: {fileID: 21300000, guid: 705f0ca97edc8854e98ad95e509e5bcd, type: 3}
+  icon: {fileID: 21300000, guid: 12c84df0b568641499833a1d7f2bfe5a, type: 3}
   cost: 50
   maxHP: 150
+  damage: 0
+  actionCooldown: 0
+  attackRange: 0
+  projectilePrefab: {fileID: 0}
   animalPrefab: {fileID: 2571085102849394881, guid: 8bbd9ee3ca1bdd94ca103ce0e6caea81, type: 3}

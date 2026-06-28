@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7af6f99f41fe4fe4f85adf195fdfd1e5
+guid: aa1eb3945fc80ae4691f400e07ac293d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4052240792789627445
-    second: razorclam kepala_0
+      213: 6956355131463558569
+    second: ratu ikan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: razorclam kepala_0
+      name: ratu ikan_0
       rect:
         serializedVersion: 2
-        x: 162
-        y: 379
-        width: 757
-        height: 641
+        x: 30
+        y: 6
+        width: 443
+        height: 462
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 532b29608837c3830800000000000000
-      internalID: 4052240792789627445
+      spriteID: 9a5e95eb220f98060800000000000000
+      internalID: 6956355131463558569
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      razorclam kepala_0: 4052240792789627445
+      ratu ikan_0: 6956355131463558569
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

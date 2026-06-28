@@ -18,6 +18,10 @@ public class HumanController : MonoBehaviour
 
     private int currentHP;
 
+    private float currentMoveSpeed;
+
+    private float originalMoveSpeed;
+
     private AnimalController targetAnimal;
     
     private float attackTimer;
@@ -30,6 +34,9 @@ public class HumanController : MonoBehaviour
     GameManager.Instance.GetComponent<AnimalCardManager>();
 
         currentHP = data.maxHealth;
+
+        originalMoveSpeed = data.moveSpeed;
+        currentMoveSpeed = originalMoveSpeed;
     }
 
     private void Update()
@@ -50,7 +57,7 @@ public class HumanController : MonoBehaviour
     {
         rect.anchoredPosition +=
             Vector2.down *
-            data.moveSpeed *
+            currentMoveSpeed *
             Time.deltaTime;
 
         UpdateCurrentRow();
@@ -125,6 +132,20 @@ public class HumanController : MonoBehaviour
     {
         Die();
     }
+}
+
+   public void Slow(float multiplier, float duration)
+{
+    CancelInvoke(nameof(RemoveSlow));
+
+    currentMoveSpeed = originalMoveSpeed * multiplier;
+
+    Invoke(nameof(RemoveSlow), duration);
+}
+
+void RemoveSlow()
+{
+    currentMoveSpeed = originalMoveSpeed;
 }
 
     public void StopMoving()

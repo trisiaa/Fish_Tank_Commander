@@ -1,8 +1,14 @@
 using UnityEngine;
 
-public class AcornController : MonoBehaviour
+public class ProjectileController : MonoBehaviour
 {
     public int damage;
+
+    public bool isPoison;
+
+    public float slowMultiplier = 0.5f;
+
+    public float slowDuration = 10f;
 
     public float speed = 600f;
 
@@ -36,6 +42,13 @@ public class AcornController : MonoBehaviour
 
     human.TakeDamage(damage);
 
-    Destroy(gameObject);
+if (isPoison)
+{
+    human.Slow(
+        slowMultiplier,
+        slowDuration);
+}
+
+Destroy(gameObject);
 }
 }

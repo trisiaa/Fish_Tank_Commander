@@ -36,16 +36,25 @@ public class AnimalController : MonoBehaviour
 
     private void Update()
 {
+    if (data.animalName == "Razor Clam")
+    {
+        return;
+    }
+
     if (data.animalName == "Porcupine")
     {
         PorcupineAttack();
+        return;
     }
-    else
-    {
-        FindTarget();
 
-        Attack();
+    if (data.animalName == "Tortoise")
+    {
+        return;
     }
+
+    FindTarget();
+
+    Attack();
 }
 
     void FindTarget()
@@ -139,10 +148,15 @@ public class AnimalController : MonoBehaviour
     GameObject projectile =
         Instantiate(data.projectilePrefab, projectileParent);
 
-    AcornController acorn =
-    projectile.GetComponent<AcornController>();
+    ProjectileController projectileController =
+        projectile.GetComponent<ProjectileController>();
 
-    acorn.damage = data.damage;
+    projectileController.damage = data.damage;
+
+    if (data.animalName == "Poison Dart Frog")
+{
+    projectileController.isPoison = true;
+}
 
     RectTransform projectileRect =
         projectile.GetComponent<RectTransform>();
