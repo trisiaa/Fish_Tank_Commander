@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class HumanManager : MonoBehaviour
 {
     [Header("Human List")]
     public HumanData[] humans;
+
+    public List<HumanController> activeHumans =
+    new List<HumanController>();
 
     [Header("Spawn Lane")]
     public RectTransform[] lanePoints;
@@ -67,5 +71,7 @@ public class HumanManager : MonoBehaviour
 controller.data = randomHuman;
 
 controller.SetLane(laneIndex);
+
+activeHumans.Add(controller);
     }
 }

@@ -16,4 +16,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 9ce4ff1a1e516184f825372fa0e56c70, type: 3}
   cost: 150
   maxHP: 150
+  damage: 10
+  actionCooldown: 2
+  attackRange: 5
+  projectilePrefab: {fileID: 0}
   animalPrefab: {fileID: 2554778495183847872, guid: 2e36551ea32af8740a58bc5b44d96cff, type: 3}

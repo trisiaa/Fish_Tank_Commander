@@ -13,5 +13,15 @@ public class AnimalCardData : ScriptableObject
     [Header("Animal")]
     public int maxHP;
 
+    [Header("Ability")]
+
+    public int damage;
+
+    public float actionCooldown;
+
+    public int attackRange;
+
+    public GameObject projectilePrefab;
+
     public GameObject animalPrefab;
 }

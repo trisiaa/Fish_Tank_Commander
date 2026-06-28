@@ -16,6 +16,8 @@ public class HumanController : MonoBehaviour
 
     private bool canMove = true;
 
+    private int currentHP;
+
     private AnimalController targetAnimal;
     
     private float attackTimer;
@@ -26,6 +28,8 @@ public class HumanController : MonoBehaviour
 
         cardManager =
     GameManager.Instance.GetComponent<AnimalCardManager>();
+
+        currentHP = data.maxHealth;
     }
 
     private void Update()
@@ -111,6 +115,18 @@ public class HumanController : MonoBehaviour
     }
 }
 
+    public void TakeDamage(int damage)
+{
+    currentHP -= damage;
+
+    Debug.Log(data.humanName + " HP : " + currentHP);
+
+    if (currentHP <= 0)
+    {
+        Die();
+    }
+}
+
     public void StopMoving()
     {
         canMove = false;
@@ -124,6 +140,19 @@ public class HumanController : MonoBehaviour
     public void SetLane(int lane)
 {
     currentLane = lane;
+}
+
+    void Die()
+{
+    HumanManager manager =
+        FindFirstObjectByType<HumanManager>();
+
+    if (manager != null)
+    {
+        manager.activeHumans.Remove(this);
+    }
+
+    Destroy(gameObject);
 }
 
 }
