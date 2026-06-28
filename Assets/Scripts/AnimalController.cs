@@ -113,22 +113,41 @@ public class AnimalController : MonoBehaviour
     Debug.Log("PORCUPINE BOOM");
 
     for (int i = humanManager.activeHumans.Count - 1; i >= 0; i--)
-{
-    HumanController human =
-        humanManager.activeHumans[i];
-
-    int rowDistance =
-        Mathf.Abs(human.currentRow - slot.row);
-
-    int laneDistance =
-        Mathf.Abs(human.currentLane - slot.lane);
-
-    if (rowDistance <= data.attackRange &&
-        laneDistance <= data.attackRange)
     {
-        human.TakeDamage(data.damage);
-    }
+        HumanController human =
+            humanManager.activeHumans[i];
+
+        Debug.Log(
+            human.data.humanName +
+            " Row = " + human.currentRow +
+            " Lane = " + human.currentLane);
+
+        Debug.Log(
+            "Porcupine Row = " + slot.row +
+            " Lane = " + slot.lane);
+
+        RectTransform humanRect =
+    human.GetComponent<RectTransform>();
+
+RectTransform slotRect =
+    slot.GetComponent<RectTransform>();
+
+float yDistance =
+    Mathf.Abs(
+        humanRect.position.y -
+        slotRect.position.y);
+
+int laneDistance =
+    Mathf.Abs(
+        human.currentLane -
+        slot.lane);
+        
+        if (yDistance <= 350f &&
+    laneDistance <= data.attackRange)
+{
+    human.TakeDamage(data.damage);
 }
+    }
 
     if (slot != null)
     {
