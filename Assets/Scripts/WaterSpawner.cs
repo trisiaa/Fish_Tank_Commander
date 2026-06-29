@@ -11,15 +11,19 @@ public class WaterSpawner : MonoBehaviour
     public float maxTime = 7f;
 
     [Header("Clam Settings")]
-public bool isRazorClam;
-public float clamInterval = 8f;
+    public bool isRazorClam;
+    public float clamInterval = 8f;
 
     [Header("Spawn Offset")]
-public Vector2 clamOffset = new Vector2(0, 80);
+    public Vector2 clamOffset = new Vector2(0, 80);
+
+    private AnimalController animalController;
 
     private void Start()
 {
-    if(isRazorClam)
+    animalController = GetComponent<AnimalController>();
+
+    if (isRazorClam)
     {
         StartCoroutine(SpawnFromClam());
     }
@@ -42,14 +46,20 @@ public Vector2 clamOffset = new Vector2(0, 80);
 
     IEnumerator SpawnFromClam()
 {
-    while(true)
+    while (true)
     {
         yield return new WaitForSeconds(clamInterval);
+
+        if (animalController != null)
+        {
+            animalController.PlayActionAnimation();
+        }
+
+        yield return new WaitForSeconds(2f);
 
         SpawnAtPosition(Vector3.zero);
     }
 }
-
     public void SpawnAtPosition(Vector3 position)
 {
     GameObject water = Instantiate(waterPrefab);

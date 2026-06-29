@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class AnimalController : MonoBehaviour
 {
     public AnimalCardData data;
+
+    private Animator animator;
 
     private float actionTimer;
 
@@ -22,6 +25,8 @@ public class AnimalController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        
         currentHP = data.maxHP;
 
         slot = GetComponentInParent<SlotManager>();
@@ -88,6 +93,8 @@ public class AnimalController : MonoBehaviour
     {
         actionTimer = 0;
 
+        PlayActionAnimation();
+
         SpawnProjectile();
 
     }
@@ -104,8 +111,17 @@ public class AnimalController : MonoBehaviour
     {
         hasExploded = true;
 
-        Explode();
+         StartCoroutine(PorcupineExplodeRoutine());
     }
+}
+
+    IEnumerator PorcupineExplodeRoutine()
+{
+    animator.enabled = true;
+
+    yield return new WaitForSeconds(2.1f);
+
+    Explode();
 }
 
     void Explode()
@@ -208,4 +224,17 @@ int laneDistance =
 
         Destroy(gameObject);
     }
+
+    public void PlayActionAnimation()
+{
+    Debug.Log("PLAY ACTION DIPANGGIL");
+
+    if (animator == null)
+    {
+        Debug.Log("Animator NULL");
+        return;
+    }
+
+    animator.SetTrigger("Action");
+}
 }
