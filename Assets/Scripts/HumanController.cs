@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class HumanController : MonoBehaviour
 {
     public HumanData data;
+
+    private Animator animator;
 
     [Header("Lane")]
     public int currentLane;
@@ -16,6 +19,8 @@ public class HumanController : MonoBehaviour
 
     private bool canMove = true;
 
+    private bool isDead = false;
+
     private int currentHP;
 
     private float currentMoveSpeed;
@@ -27,20 +32,27 @@ public class HumanController : MonoBehaviour
     private float attackTimer;
 
     private void Awake()
-    {
-        rect = GetComponent<RectTransform>();
+{
+    animator = GetComponent<Animator>();
 
-        cardManager =
-    GameManager.Instance.GetComponent<AnimalCardManager>();
+    rect = GetComponent<RectTransform>();
 
-        currentHP = data.maxHealth;
+    cardManager =
+        GameManager.Instance.GetComponent<AnimalCardManager>();
 
-        originalMoveSpeed = data.moveSpeed;
-        currentMoveSpeed = originalMoveSpeed;
-    }
+    currentHP = data.maxHealth;
+
+    originalMoveSpeed = data.moveSpeed;
+    currentMoveSpeed = originalMoveSpeed;
+
+    PlayWalkAnimation();
+}
 
     private void Update()
 {
+    if (isDead)
+        return;
+
     CheckAnimal();
 
     if (canMove)
@@ -151,11 +163,15 @@ void RemoveSlow()
     public void StopMoving()
     {
         canMove = false;
+
+        PlayAttackAnimation();
     }
 
     public void ContinueMoving()
     {
         canMove = true;
+
+        PlayWalkAnimation();
     }
 
     public void SetLane(int lane)
@@ -165,6 +181,11 @@ void RemoveSlow()
 
     void Die()
 {
+    isDead = true;
+    canMove = false;
+
+    PlayDieAnimation();
+
     HumanManager manager =
         FindFirstObjectByType<HumanManager>();
 
@@ -173,7 +194,42 @@ void RemoveSlow()
         manager.activeHumans.Remove(this);
     }
 
+    StartCoroutine(DieRoutine());
+}
+
+IEnumerator DieRoutine()
+{
+    canMove = false;
+
+    yield return new WaitForSeconds(2f);
+
     Destroy(gameObject);
+}
+
+    public void PlayWalkAnimation()
+{
+    if (animator == null)
+        return;
+
+    animator.SetBool("Walk", true);
+    animator.SetBool("Attack", false);
+}
+
+public void PlayAttackAnimation()
+{
+    if (animator == null)
+        return;
+
+    animator.SetBool("Walk", false);
+    animator.SetBool("Attack", true);
+}
+
+public void PlayDieAnimation()
+{
+    if (animator == null)
+        return;
+
+    animator.SetTrigger("Die");
 }
 
 }
