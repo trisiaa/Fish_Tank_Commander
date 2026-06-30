@@ -15,7 +15,7 @@ MonoBehaviour:
   humanName: Ojol
   sprite: {fileID: 21300000, guid: 163c79ab61445bb4cac134b9ab442170, type: 3}
   prefab: {fileID: 601826319294480550, guid: 02a2cefdccf0f7043afd2b475e6cd886, type: 3}
-  moveSpeed: 25
+  moveSpeed: 12
   maxHealth: 150
   damage: 20
   attackInterval: 2

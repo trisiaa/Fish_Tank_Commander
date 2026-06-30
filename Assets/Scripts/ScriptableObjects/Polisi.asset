@@ -15,7 +15,7 @@ MonoBehaviour:
   humanName: Polisi
   sprite: {fileID: 21300000, guid: ac1a1ba18d6d97743b0de8085fa54d68, type: 3}
   prefab: {fileID: 7492100008926061374, guid: 3fd90f3ce49e0294bba2531dcfdef76e, type: 3}
-  moveSpeed: 25
+  moveSpeed: 12
   maxHealth: 200
   damage: 20
   attackInterval: 2

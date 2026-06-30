@@ -191,14 +191,6 @@ void RemoveSlow()
 
     PlayDieAnimation();
 
-    HumanManager manager =
-        FindFirstObjectByType<HumanManager>();
-
-    if (manager != null)
-    {
-        manager.activeHumans.Remove(this);
-    }
-
     StartCoroutine(DieRoutine());
 }
 
@@ -207,6 +199,14 @@ IEnumerator DieRoutine()
     canMove = false;
 
     yield return new WaitForSeconds(2f);
+
+    HumanManager manager =
+        FindFirstObjectByType<HumanManager>();
+
+    if (manager != null)
+    {
+        manager.activeHumans.Remove(this);
+    }
 
     Destroy(gameObject);
 }

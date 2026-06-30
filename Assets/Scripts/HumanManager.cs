@@ -23,14 +23,24 @@ public class HumanManager : MonoBehaviour
     public float minSpawnTime = 2f;
     public float maxSpawnTime = 5f;
 
+    [Header("Level")]
+    public int totalHuman = 25;
+    private int spawnedHuman = 0;
+    private bool spawnFinished = false;
+
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
     }
 
+    private void Update()
+{
+    CheckWin();
+}
+
     IEnumerator SpawnRoutine()
     {
-        while (true)
+        while (spawnedHuman < totalHuman)
 {
     yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
 
@@ -38,7 +48,11 @@ public class HumanManager : MonoBehaviour
         yield break;
 
     SpawnHuman();
+
+    spawnedHuman++;
 }
+
+spawnFinished = true;
     }
 
     void SpawnHuman()
@@ -76,4 +90,32 @@ controller.SetLane(laneIndex);
 
 activeHumans.Add(controller);
     }
+
+    private bool winTriggered = false;
+
+void CheckWin()
+{
+    if (GameManager.Instance.IsGameOver)
+        return;
+
+    if (winTriggered)
+        return;
+
+    if (!spawnFinished)
+        return;
+
+    if (activeHumans.Count > 0)
+        return;
+
+    winTriggered = true;
+
+    StartCoroutine(WinRoutine());
+}
+
+    IEnumerator WinRoutine()
+{
+    yield return new WaitForSeconds(2f);
+
+    GameManager.Instance.Win();
+}
 }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game UI")]
     public GameObject gameOverPanel;
+    public GameObject winPanel;
     public RectTransform finishArea;
 
     private bool gameOver = false;
@@ -125,5 +126,17 @@ public class GameManager : MonoBehaviour
     Time.timeScale = 0f;
 
     gameOverPanel.SetActive(true);
+}
+
+    public void Win()
+{
+    if (gameOver)
+        return;
+
+    gameOver = true;
+
+    Time.timeScale = 0f;
+
+    winPanel.SetActive(true);
 }
 }

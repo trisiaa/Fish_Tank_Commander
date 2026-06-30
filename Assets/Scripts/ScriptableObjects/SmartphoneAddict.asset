@@ -15,7 +15,7 @@ MonoBehaviour:
   humanName: SmartphoneAddict
   sprite: {fileID: 21300000, guid: ca527471e4872334f8b30f4936d5eb12, type: 3}
   prefab: {fileID: 7492100008926061374, guid: 818bc6df2f9018f4598e4b8925948cac, type: 3}
-  moveSpeed: 25
+  moveSpeed: 12
   maxHealth: 100
   damage: 20
   attackInterval: 2
