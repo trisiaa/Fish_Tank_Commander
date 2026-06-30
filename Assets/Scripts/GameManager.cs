@@ -9,6 +9,14 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text waterText;
 
+    [Header("Game UI")]
+    public GameObject gameOverPanel;
+    public RectTransform finishArea;
+
+    private bool gameOver = false;
+
+    public bool IsGameOver => gameOver;
+
     public CanvasGroup waterPanel;
 
     public int startingWater = 0;
@@ -106,4 +114,16 @@ public class GameManager : MonoBehaviour
 
         waterPanel.alpha = 1f;
     }
+
+    public void GameOver()
+{
+    if (gameOver)
+        return;
+
+    gameOver = true;
+
+    Time.timeScale = 0f;
+
+    gameOverPanel.SetActive(true);
+}
 }

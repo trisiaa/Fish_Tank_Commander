@@ -53,6 +53,9 @@ public class HumanController : MonoBehaviour
     if (isDead)
         return;
 
+    if (GameManager.Instance.IsGameOver)
+        return;
+
     CheckAnimal();
 
     if (canMove)
@@ -74,10 +77,12 @@ public class HumanController : MonoBehaviour
 
         UpdateCurrentRow();
 
-        if (rect.anchoredPosition.y < -1800)
-        {
-            Destroy(gameObject);
-        }
+        if (rect.position.y <= GameManager.Instance.finishArea.position.y)
+{
+    GameManager.Instance.GameOver();
+
+    Destroy(gameObject);
+}
     }
 
     void UpdateCurrentRow()

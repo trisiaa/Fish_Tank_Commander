@@ -31,12 +31,14 @@ public class HumanManager : MonoBehaviour
     IEnumerator SpawnRoutine()
     {
         while (true)
-        {
-            yield return new WaitForSeconds(
-                Random.Range(minSpawnTime, maxSpawnTime));
+{
+    yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
 
-            SpawnHuman();
-        }
+    if (GameManager.Instance.IsGameOver)
+        yield break;
+
+    SpawnHuman();
+}
     }
 
     void SpawnHuman()
