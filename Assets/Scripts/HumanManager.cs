@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class HumanManager : MonoBehaviour
 {
-    [Header("Human List")]
-    public HumanData[] humans;
+    [Header("Spawn Group")]
+    public SpawnGroup[] spawnGroups;
 
     public List<HumanController> activeHumans =
     new List<HumanController>();
@@ -23,15 +23,64 @@ public class HumanManager : MonoBehaviour
     public float minSpawnTime = 2f;
     public float maxSpawnTime = 5f;
 
-    [Header("Level")]
-    public int totalHuman = 25;
+    [Header("Wave")]
+    public float waveInterval = 0.4f;
+
     private int spawnedHuman = 0;
+
+    private int totalHuman = 0;
+
+    private int totalNormalHuman = 0;
+
     private bool spawnFinished = false;
+
+    private bool finalWaveStarted = false;
+
+    private List<HumanData> normalQueue =
+    new List<HumanData>();
+
+    private List<HumanData> waveQueue =
+    new List<HumanData>();
 
     private void Start()
     {
+        CalculateHuman();
+
         StartCoroutine(SpawnRoutine());
     }
+
+    void CalculateHuman()
+{
+    totalHuman = 0;
+    totalNormalHuman = 0;
+
+    normalQueue.Clear();
+    waveQueue.Clear();
+
+    foreach (SpawnGroup group in spawnGroups)
+    {
+        for (int i = 0; i < group.normalAmount; i++)
+        {
+            normalQueue.Add(group.human);
+
+            totalNormalHuman++;
+            totalHuman++;
+        }
+
+        for (int i = 0; i < group.waveAmount; i++)
+        {
+            waveQueue.Add(group.human);
+
+            totalHuman++;
+        }
+    }
+
+    if (WaveManager.Instance != null)
+{
+    WaveManager.Instance.Initialize(totalNormalHuman);
+}
+
+}
 
     private void Update()
 {
@@ -39,57 +88,91 @@ public class HumanManager : MonoBehaviour
 }
 
     IEnumerator SpawnRoutine()
-    {
-        while (spawnedHuman < totalHuman)
 {
-    yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+    while (normalQueue.Count > 0)
+    {
+        yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
 
-    if (GameManager.Instance.IsGameOver)
-        yield break;
+        if (GameManager.Instance.IsGameOver)
+            yield break;
 
-    SpawnHuman();
+        int index =
+            Random.Range(0, normalQueue.Count);
 
-    spawnedHuman++;
+        HumanData human =
+            normalQueue[index];
+
+        normalQueue.RemoveAt(index);
+
+        SpawnHuman(human);
+
+spawnedHuman++;
+
+if (WaveManager.Instance != null)
+{
+    WaveManager.Instance.HumanSpawned();
+}
+    }
+
+    finalWaveStarted = true;
+
+if (WaveManager.Instance != null)
+{
+    WaveManager.Instance.StartFinalWave();
 }
 
-spawnFinished = true;
-    }
+// Jeda sebelum Final Wave dimulai
+yield return new WaitForSeconds(30f);
 
-    void SpawnHuman()
+    while (waveQueue.Count > 0)
     {
-        if (humans.Length == 0)
-            return;
+        yield return new WaitForSeconds(waveInterval);
 
-        if (activeLanes.Length == 0)
-            return;
+        if (GameManager.Instance.IsGameOver)
+            yield break;
 
-        HumanData randomHuman =
-            humans[Random.Range(0, humans.Length)];
+        HumanData human =
+            waveQueue[0];
 
-        int laneIndex =
-            activeLanes[Random.Range(0, activeLanes.Length)];
+        waveQueue.RemoveAt(0);
 
-        RectTransform lane =
-            lanePoints[laneIndex];
+        SpawnHuman(human);
 
-        GameObject newHuman =
-            Instantiate(randomHuman.prefab, humanParent);
-
-        RectTransform rect =
-            newHuman.GetComponent<RectTransform>();
-
-        rect.anchoredPosition =
-            lane.anchoredPosition;
-
-        HumanController controller =
-    newHuman.GetComponent<HumanController>();
-
-controller.data = randomHuman;
-
-controller.SetLane(laneIndex);
-
-activeHumans.Add(controller);
+        spawnedHuman++;
     }
+
+    spawnFinished = true;
+}
+
+    void SpawnHuman(HumanData human)
+{
+    if (activeLanes.Length == 0)
+        return;
+
+    int laneIndex =
+        activeLanes[Random.Range(0, activeLanes.Length)];
+
+    RectTransform lane =
+        lanePoints[laneIndex];
+
+    GameObject newHuman =
+        Instantiate(human.prefab, humanParent);
+
+    RectTransform rect =
+        newHuman.GetComponent<RectTransform>();
+
+    rect.anchoredPosition =
+        lane.anchoredPosition;
+
+    HumanController controller =
+        newHuman.GetComponent<HumanController>();
+
+    controller.data = human;
+
+    controller.SetLane(laneIndex);
+
+    activeHumans.Add(controller);
+}
 
     private bool winTriggered = false;
 
