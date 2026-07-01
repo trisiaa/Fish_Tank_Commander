@@ -7,6 +7,9 @@ public class AnimalController : MonoBehaviour
 
     private Animator animator;
 
+    [Header("Effects")]
+    public GameObject explosionSmokePrefab;
+
     private float actionTimer;
 
     private HumanController targetHuman;
@@ -126,6 +129,8 @@ public class AnimalController : MonoBehaviour
 
     void Explode()
 {
+    SpawnExplosionSmoke();
+    
     Debug.Log("PORCUPINE BOOM");
 
     for (int i = humanManager.activeHumans.Count - 1; i >= 0; i--)
@@ -173,6 +178,25 @@ int laneDistance =
     gameObject.SetActive(false);
 
     Destroy(gameObject);
+}
+
+    void SpawnExplosionSmoke()
+{
+    if (explosionSmokePrefab == null)
+        return;
+
+    GameObject smoke =
+        Instantiate(
+            explosionSmokePrefab,
+            transform.parent);
+
+    RectTransform smokeRect =
+        smoke.GetComponent<RectTransform>();
+
+    smokeRect.anchoredPosition =
+        GetComponent<RectTransform>().anchoredPosition;
+
+    Destroy(smoke, 2f);
 }
 
     void SpawnProjectile()

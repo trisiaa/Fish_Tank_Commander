@@ -173,6 +173,8 @@ if (WaveManager.Instance != null)
     controller.SetLane(laneIndex);
 
     activeHumans.Add(controller);
+
+    newHuman.transform.SetAsFirstSibling();
 }
 
     private bool winTriggered = false;
