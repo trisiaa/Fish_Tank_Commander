@@ -114,15 +114,16 @@ if (WaveManager.Instance != null)
 }
     }
 
-    finalWaveStarted = true;
+    // Arena tenang selama 30 detik
+yield return new WaitForSeconds(30f);
+
+finalWaveStarted = true;
 
 if (WaveManager.Instance != null)
 {
-    WaveManager.Instance.StartFinalWave();
+    yield return StartCoroutine(
+    WaveManager.Instance.StartFinalWave());
 }
-
-// Jeda sebelum Final Wave dimulai
-yield return new WaitForSeconds(30f);
 
     while (waveQueue.Count > 0)
     {
