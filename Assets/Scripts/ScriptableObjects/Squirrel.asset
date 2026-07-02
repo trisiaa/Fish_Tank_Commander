@@ -15,6 +15,7 @@ MonoBehaviour:
   animalName: Squirrel
   icon: {fileID: 21300000, guid: 0d2d021b02c25994fbd95e771d85cab7, type: 3}
   cost: 100
+  cardCooldown: 3
   maxHP: 100
   damage: 10
   actionCooldown: 2

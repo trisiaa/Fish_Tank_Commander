@@ -15,6 +15,7 @@ MonoBehaviour:
   animalName: Poison Dart Frog
   icon: {fileID: 21300000, guid: 63c3ae73388f7674aa625de0b2055dfd, type: 3}
   cost: 150
+  cardCooldown: 10
   maxHP: 150
   damage: 10
   actionCooldown: 2

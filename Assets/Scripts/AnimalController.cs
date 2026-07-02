@@ -7,9 +7,6 @@ public class AnimalController : MonoBehaviour
 
     private Animator animator;
 
-    [Header("Effects")]
-    public GameObject explosionSmokePrefab;
-
     private float actionTimer;
 
     private HumanController targetHuman;
@@ -129,8 +126,6 @@ public class AnimalController : MonoBehaviour
 
     void Explode()
 {
-    SpawnExplosionSmoke();
-    
     Debug.Log("PORCUPINE BOOM");
 
     for (int i = humanManager.activeHumans.Count - 1; i >= 0; i--)
@@ -138,36 +133,27 @@ public class AnimalController : MonoBehaviour
         HumanController human =
             humanManager.activeHumans[i];
 
-        Debug.Log(
-            human.data.humanName +
-            " Row = " + human.currentRow +
-            " Lane = " + human.currentLane);
-
-        Debug.Log(
-            "Porcupine Row = " + slot.row +
-            " Lane = " + slot.lane);
-
         RectTransform humanRect =
-    human.GetComponent<RectTransform>();
+            human.GetComponent<RectTransform>();
 
-RectTransform slotRect =
-    slot.GetComponent<RectTransform>();
+        RectTransform slotRect =
+            slot.GetComponent<RectTransform>();
 
-float yDistance =
-    Mathf.Abs(
-        humanRect.position.y -
-        slotRect.position.y);
+        float yDistance =
+            Mathf.Abs(
+                humanRect.position.y -
+                slotRect.position.y);
 
-int laneDistance =
-    Mathf.Abs(
-        human.currentLane -
-        slot.lane);
-        
+        int laneDistance =
+            Mathf.Abs(
+                human.currentLane -
+                slot.lane);
+
         if (yDistance <= 350f &&
-    laneDistance <= data.attackRange)
-{
-    human.TakeDamage(data.damage);
-}
+            laneDistance <= data.attackRange)
+        {
+            human.TakeDamage(data.damage);
+        }
     }
 
     if (slot != null)
@@ -178,25 +164,6 @@ int laneDistance =
     gameObject.SetActive(false);
 
     Destroy(gameObject);
-}
-
-    void SpawnExplosionSmoke()
-{
-    if (explosionSmokePrefab == null)
-        return;
-
-    GameObject smoke =
-        Instantiate(
-            explosionSmokePrefab,
-            transform.parent);
-
-    RectTransform smokeRect =
-        smoke.GetComponent<RectTransform>();
-
-    smokeRect.anchoredPosition =
-        GetComponent<RectTransform>().anchoredPosition;
-
-    Destroy(smoke, 2f);
 }
 
     void SpawnProjectile()

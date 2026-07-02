@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 
 public class CardManager : MonoBehaviour, IPointerClickHandler
@@ -9,6 +10,9 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     public GameObject selectedBorder;
 
     public GameObject lockOverlay;
+
+    public Image cooldownOverlay;
+    private bool isCooldown = false;
 
     public static AnimalCardData selectedCard;
 
@@ -23,8 +27,16 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     cardImage = GetComponent<Image>();
 }
 
+    private void Start()
+{
+    StartCoroutine(CardCooldown());
+}
+
     public void OnPointerClick(PointerEventData eventData)
 {
+    if (isCooldown)
+    return;
+
     if(!GameManager.Instance.HasWater(
     animalCardData.cost))
 {
@@ -81,20 +93,51 @@ public class CardManager : MonoBehaviour, IPointerClickHandler
     }
 
     if (currentSelectedCard != null)
-    {
-        currentSelectedCard.selectedBorder.SetActive(false);
-        currentSelectedCard = null;
-    }
+{
+    currentSelectedCard.StartCoroutine(currentSelectedCard.CardCooldown());
 
-    selectedCard = null;
+    currentSelectedCard.selectedBorder.SetActive(false);
+    currentSelectedCard = null;
+}
+
+selectedCard = null;
 }
 
 public void UpdateCardVisual()
 {
     bool enoughWater =
-        GameManager.Instance.HasWater(
-            animalCardData.cost);
+        GameManager.Instance.HasWater(animalCardData.cost);
 
-    lockOverlay.SetActive(!enoughWater);
+    lockOverlay.SetActive(!enoughWater || isCooldown);
+}
+
+IEnumerator CardCooldown()
+{
+    isCooldown = true;
+
+UpdateCardVisual();
+
+cooldownOverlay.gameObject.SetActive(true);
+cooldownOverlay.fillAmount = 1f;
+
+    float timer = animalCardData.cardCooldown;
+
+    while (timer > 0)
+    {
+        timer -= Time.deltaTime;
+
+        cooldownOverlay.fillAmount =
+            timer / animalCardData.cardCooldown;
+
+        yield return null;
+    }
+
+    cooldownOverlay.fillAmount = 0;
+
+    cooldownOverlay.gameObject.SetActive(false);
+
+    isCooldown = false;
+
+    UpdateCardVisual();
 }
 }

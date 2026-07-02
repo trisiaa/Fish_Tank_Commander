@@ -15,6 +15,7 @@ MonoBehaviour:
   animalName: Porcupine
   icon: {fileID: 21300000, guid: 808289da1fdf0a84f878c9198c4fe1e6, type: 3}
   cost: 50
+  cardCooldown: 20
   maxHP: 50
   damage: 1500
   actionCooldown: 0.5

@@ -9,6 +9,7 @@ public class AnimalCardData : ScriptableObject
 
     [Header("Card")]
     public int cost;
+    public float cardCooldown;
 
     [Header("Animal")]
     public int maxHP;
